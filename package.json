@@ -1,0 +1,16 @@
+{
+  "name": "wetube",
+  "version": "1.0.0",
+  "description": "The best way to watch videos.",
+  "main": "index.js",
+  "author": "fever<fever_max@naver.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fever-max/wetube-reloaded.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fever-max/wetube-reloaded/issues"
+  },
+  "homepage": "https://github.com/fever-max/wetube-reloaded#readme"
+}
