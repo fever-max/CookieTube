@@ -153,7 +153,6 @@ export const postEdit = async (req, res) => {
     },
     body: { name, email, username, location },
   } = req;
-
   // 유저가 프로필을 수정할 때 데이터베이스에서 체크
   //$ne는 not equal의 약어로 주어진 값과 필드의 값을 비교하는 연산자 (MongoDB 연산자)
   const existingUser = await User.findOne({
@@ -173,21 +172,21 @@ export const postEdit = async (req, res) => {
       pageTitle: "Edit Profile",
       errorMessage: errorMessage.join(" "),
     });
+  } else {
+    // 중복되지 않으면 유저 정보 업데이트 실행
+    const updatedUser = await User.findByIdAndUpdate(
+      _id,
+      {
+        name,
+        email,
+        username,
+        location,
+      },
+      { new: true }
+    );
+    req.session.user = updatedUser;
+    res.redirect("/users/edit");
   }
-
-  // 중복되지 않으면 유저 정보 업데이트 실행
-  const updatedUser = await User.findByIdAndUpdate(
-    _id,
-    {
-      name,
-      email,
-      username,
-      location,
-    },
-    { new: true }
-  );
-  req.session.user = updatedUser;
-  res.redirect("/users/edit");
 };
 
 export const see = (req, res) => res.send("See");
