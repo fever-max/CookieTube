@@ -153,8 +153,9 @@ export const postEdit = async (req, res) => {
     },
     body: { name, email, username, location },
   } = req;
-  // 유저가 프로필을 수정할 때 데이터베이스에서 체크
-  //$ne는 not equal의 약어로 주어진 값과 필드의 값을 비교하는 연산자 (MongoDB 연산자)
+  /*유저가 프로필을 수정할 때 데이터베이스에서 체크 진행.
+User에서 이메일 또는 유저네임이 입력값과 일치한 사용자를 검색. 단, 검색 결과에서 현재 사용자 ID와 다른 사용자만 포함.
+**$ne는 not equal의 약어로 주어진 값과 필드의 값을 비교하는 MongoDB 연산자*/
   const existingUser = await User.findOne({
     $or: [{ email }, { username }],
     _id: { $ne: _id },
