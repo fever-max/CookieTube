@@ -23,12 +23,15 @@
     "express-session": "^1.17.3",
     "mongoose": "^7.4.0",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "pug": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",
     "@babel/node": "^7.22.6",
     "@babel/preset-env": "^7.22.9",
-    "nodemon": "^3.0.1"
+    "@prettier/plugin-pug": "^3.0.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.0"
   }
 }

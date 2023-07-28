@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import { render } from "pug";
 import User from "../models/User";
 
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
@@ -149,13 +150,14 @@ export const getEdit = (req, res) => {
 export const postEdit = async (req, res) => {
   const {
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
     body: { name, email, username, location },
+    file,
   } = req;
   /*유저가 프로필을 수정할 때 데이터베이스에서 체크 진행.
 User에서 이메일 또는 유저네임이 입력값과 일치한 사용자를 검색. 단, 검색 결과에서 현재 사용자 ID와 다른 사용자만 포함.
-**$ne는 not equal의 약어로 주어진 값과 필드의 값을 비교하는 MongoDB 연산자*/
+$ne는 not equal의 약어로 주어진 값과 필드의 값을 비교하는 MongoDB 연산자*/
   const existingUser = await User.findOne({
     $or: [{ email }, { username }],
     _id: { $ne: _id },
@@ -178,6 +180,7 @@ User에서 이메일 또는 유저네임이 입력값과 일치한 사용자를 
     const updatedUser = await User.findByIdAndUpdate(
       _id,
       {
+        avatarUrl: file ? file.path : avatarUrl,
         name,
         email,
         username,
@@ -188,6 +191,44 @@ User에서 이메일 또는 유저네임이 입력값과 일치한 사용자를 
     req.session.user = updatedUser;
     res.redirect("/users/edit");
   }
+};
+
+export const getChangePassword = (req, res) => {
+  if (req.session.user.socialOnly === true) {
+    return res.redirect("/");
+  }
+  return res.render("users/change-password", { pageTitle: "Change Password" });
+};
+export const postChangePassword = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { oldPassword, newPassword, newPasswordConfirmation },
+  } = req;
+  const user = await User.findById(_id);
+  const ok = await bcrypt.compare(oldPassword, user.password);
+  if (!ok) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The current password is incorrect",
+    });
+  }
+  if (newPassword !== newPasswordConfirmation) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The password does not match the confirmation",
+    });
+  }
+  if (oldPassword === newPassword) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The old password equals new password",
+    });
+  }
+  user.password = newPassword;
+  await user.save();
+  return res.redirect("/users/logout");
 };
 
 export const see = (req, res) => res.send("See");
