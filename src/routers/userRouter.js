@@ -8,6 +8,7 @@ import {
   finishGithubLogin,
   getChangePassword,
   postChangePassword,
+  signout,
 } from "../controllers/userController";
 import {
   protectorMiddleware,

@@ -194,6 +194,7 @@ $ne는 not equal의 약어로 주어진 값과 필드의 값을 비교하는 Mon
 
 export const getChangePassword = (req, res) => {
   if (req.session.user.socialOnly === true) {
+    req.flash("error", "Can't change password");
     return res.redirect("/");
   }
   return res.render("users/change-password", { pageTitle: "Change Password" });
@@ -227,6 +228,7 @@ export const postChangePassword = async (req, res) => {
   }
   user.password = newPassword;
   await user.save();
+  req.flash("info", "Password updated");
   return res.redirect("/users/logout");
 };
 

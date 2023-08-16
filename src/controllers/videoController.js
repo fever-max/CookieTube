@@ -27,6 +27,7 @@ export const getEdit = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
   if (String(video.owner) !== String(_id)) {
+    req.flash("error", "Not Authorized");
     return res.status(403).redirect("/");
   }
   return res.render("edit", { pageTitle: `Edit: ${video.title}`, video });
@@ -40,7 +41,7 @@ export const postEdit = async (req, res) => {
   const { title, description, hashtags } = req.body;
   /*exist는 filter를 넘겨 받아, 원하는 조건을 선택해서 사용가능
   (true or false만 받는 형식, findById를 다 불러오는 것보다 효과적) */
-  const video = await Video.exists({ _id: id });
+  const video = await Video.findById({ _id: id });
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
@@ -52,6 +53,7 @@ export const postEdit = async (req, res) => {
     description,
     hashtags: Video.formatHashtags(hashtags),
   });
+  req.flash("success", "Changes saved");
   return res.redirect(`/videos/${id}`);
 };
 
@@ -63,13 +65,14 @@ export const postUpload = async (req, res) => {
   const {
     user: { _id },
   } = req.session;
-  const { path: fileUrl } = req.file;
+  const { video, thumb } = req.files;
   const { title, description, hashtags } = req.body;
   try {
     const newVideo = await Video.create({
       title,
       description,
-      fileUrl,
+      fileUrl: video[0].path,
+      thumbUrl: thumb[0].path,
       owner: _id,
       hashtags: Video.formatHashtags(hashtags),
     });

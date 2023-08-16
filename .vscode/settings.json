@@ -5,7 +5,9 @@
     "Loade",
     "loggedin",
     "middlewares",
+    "ondataavailable",
     "resave",
+    "signout",
     "vidoes",
     "Wetube"
   ]

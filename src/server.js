@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import session from "express-session";
+import flash from "express-flash";
 import MongoStore from "connect-mongo";
 
 import rootRouter from "./routers/rootRouter";
@@ -14,6 +15,13 @@ const logger = morgan("dev");
 
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
+
+// FFmpeg
+app.use((req, res, next) => {
+  res.header("Cross-Origin-Embedder-Policy", "require-corp");
+  res.header("Cross-Origin-Opener-Policy", "same-origin");
+  next();
+});
 
 app.use(logger);
 /*HTML 폼을 js object 형식으로 번경해주는 미들웨어 플러그인 urlencoded는
@@ -32,6 +40,7 @@ app.use(
 );
 
 //localsMiddleware는 session middleware 다음에 있어야지만 session object에 접근 가능
+app.use(flash());
 app.use(localsMiddleware);
 app.use("/uploads", express.static("uploads"));
 app.use("/static", express.static("assets"));
