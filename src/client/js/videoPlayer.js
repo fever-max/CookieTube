@@ -38,6 +38,14 @@ const changeVideoTime = (seconds) => {
   video.currentTime += seconds;
 };
 
+//코멘트 창에서 스페이스 눌러도 영상이 멈추지 않게 코드 추가
+const videoComments = document.querySelector(".video__add-comments");
+videoComments.addEventListener("keyup", (event) => {
+  if (event.code === "Space") {
+    event.stopPropagation();
+  }
+});
+
 document.addEventListener("keyup", (event) => {
   if (event.code === "Space") {
     handlePlayClick();
