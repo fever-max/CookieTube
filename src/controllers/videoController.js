@@ -168,5 +168,5 @@ export const deleteComment = async (req, res) => {
   }
 
   await Comment.findByIdAndDelete(id);
-  return res.sendStatus(204);
+  return res.sendStatus(201);
 };

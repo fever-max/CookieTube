@@ -19,6 +19,7 @@ const addComment = (text, id) => {
   const span2 = document.createElement("span");
   span2.innerText = "❌";
   span2.style.float = "right";
+  span2.style.alignItems = "center";
 
   newComment.appendChild(icon);
   newComment.appendChild(span);
