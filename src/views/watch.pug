@@ -11,9 +11,9 @@ block content
                     span#currenTime 00:00
                     span  / 
                     span#totalTime 00:00
-            input(type="range",step="1", value="0", min="0")#timeline.videoControls__timeline
+            input(type="range", step="1", value="0", min="0")#timeline.videoControls__timeline
             div.videoControls__volume
-                input(type="range",step="0.1", value=0.5, min="0", max="1")#volume
+                input(type="range", step="0.1", value=0.5, min="0", max="1")#volume
                 span#mute
                     i.fas.fa-volume-up
                 span#fullScreen
@@ -25,9 +25,11 @@ block content
             a(href=`/users/${video.owner._id}`)=video.owner.name
             br
         small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
-            br
+        br
         small.video__description=video.description 
-            br
+        br
+        small.video__hashtags=video.hashtags
+        br
         if String(video.owner._id) === String(loggedInUser._id)
             a(href=`${video.id}/edit`) Edit Video &rarr;
             a(href=`${video.id}/delete`) Delete Video &rarr;
@@ -37,14 +39,16 @@ block content
             form.video__comment-form#commentForm
                 textarea(cols="30", rows="10", placeholder="Write a nice comment...")
                 button Add Comment
-    div.video__comments
-        ul 
-            each comment in video.comments.reverse()
-                li.video__comment
-                    i.fas.fa-comment
-                    span  #{comment.text}
+        div.video__comments
+            ul 
+                each comment in video.comments.reverse()
+                    li#deleteComment.video__comment(data-id=comment.id)
+                        i.fas.fa-comment 
+                        span  #{comment.text}
+                        if String(comment.owner._id) === String(loggedInUser._id)
+                            span.deleteCommentBtn(data-id=comment.id) ❌
 
 block scripts
     script(src="/static/js/videoPlayer.js")
     if loggedIn
-        script(src="/static/js/commentSection.js") 
+        script(src="/static/js/commentSection.js")
