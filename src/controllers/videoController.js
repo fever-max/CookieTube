@@ -12,7 +12,6 @@ export const home = async (req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner").populate("comments");
-  console.log(video);
   if (!video) {
     return res.render("404", { pageTitle: "Video not found." });
   }
@@ -168,5 +167,5 @@ export const deleteComment = async (req, res) => {
   }
 
   await Comment.findByIdAndDelete(id);
-  return res.sendStatus(201);
+  return res.sendStatus(204);
 };

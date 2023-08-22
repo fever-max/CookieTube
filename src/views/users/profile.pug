@@ -1,15 +1,12 @@
 extends ../base
 include ../mixins/video
 
-block content
+block content 
     div.profile__data
-        img(src=user.avatarUrl, crossorigin="use-credentials").avatar
+        img(src="/" + user.avatarUrl).avatar
         h3=user.name
     div.video-grid
         each video in user.videos
-            if video.avatar
-                +video(video)
-            else
-                +video({ ...video, avatar: '😀' })
+            +video(video)
         else
             span.empty__message No videos found
