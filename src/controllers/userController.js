@@ -179,7 +179,7 @@ $ne는 not equal의 약어로 주어진 값과 필드의 값을 비교하는 Mon
     const updatedUser = await User.findByIdAndUpdate(
       _id,
       {
-        avatarUrl: file ? file.path : avatarUrl,
+        avatarUrl: file ? file.location : avatarUrl,
         name,
         email,
         username,
