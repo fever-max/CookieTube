@@ -1,5 +1,5 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const  = require("path");
+const path = require("path");
 
 const BASE_JS = "./src/client/js/";
 
