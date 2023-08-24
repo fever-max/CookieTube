@@ -12,8 +12,14 @@ const s3 = new S3Client({
 
 const s3ImageUploader = multerS3({
   s3: s3,
-  bucket: "cookietube/images",
+  bucket: "cookietube",
   acl: "public-read",
+  // bucket 안에 folder 속에 file 분류하기
+  key: function (request, file, ab_callback) {
+    const newFileName = Date.now() + "-" + file.originalname;
+    const fullPath = "images/" + newFileName;
+    ab_callback(null, fullPath);
+  },
 });
 
 const s3VideoUploader = multerS3({
