@@ -10,9 +10,15 @@ const s3 = new S3Client({
   },
 });
 
-const multerUploader = multerS3({
+const s3ImageUploader = multerS3({
   s3: s3,
-  bucket: "cookietube",
+  bucket: "cookietube/images",
+  acl: "public-read",
+});
+
+const s3VideoUploader = multerS3({
+  s3: s3,
+  bucket: "cookietube/videos",
   acl: "public-read",
 });
 
@@ -46,7 +52,7 @@ export const avatarUpload = multer({
   limits: {
     fieldSize: 3000000,
   },
-  storage: multerUploader,
+  storage: s3ImageUploader,
 });
 
 export const videoUpload = multer({
@@ -54,5 +60,5 @@ export const videoUpload = multer({
   limits: {
     fieldSize: 10000000,
   },
-  storage: multerUploader,
+  storage: s3VideoUploader,
 });
