@@ -175,11 +175,12 @@ $ne는 not equal의 약어로 주어진 값과 필드의 값을 비교하는 Mon
       errorMessage: errorMessage.join(" "),
     });
   } else {
+    const isHeroku = process.env.NODE_ENV === "production";
     // 중복되지 않으면 유저 정보 업데이트 실행
     const updatedUser = await User.findByIdAndUpdate(
       _id,
       {
-        avatarUrl: file ? file.location : avatarUrl,
+        avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
         name,
         email,
         username,
