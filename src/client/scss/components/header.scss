@@ -1,11 +1,16 @@
 header {
   padding: 20px 50px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   .header__logo {
     color: $red;
     font-size: 38px;
+  }
+  .cookie__logo {
+    width: 150px;
+    height: auto;
   }
   ul {
     display: flex;

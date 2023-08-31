@@ -1,14 +1,15 @@
 header
-    a(href="/").header__logo
-        i.fab.fa-youtube
+    div.header__logo-container
+        a(href="/").header__logo
+            img.cookie__logo(src="https://ifh.cc/g/t9Pw9J.png", alt="logo")
     nav
         ul
             li
                 a(href="/search")
                     i.fas.fa-search
+            li
+                a(href="/videos/upload") Upload Video
             if loggedIn
-                li
-                    a(href="/videos/upload") Upload Video
                 li
                     a(href="/users/edit") Edit Profile
                 li
