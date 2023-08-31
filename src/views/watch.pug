@@ -41,14 +41,14 @@ block content
             form.video__comment-form#commentForm
                 textarea.comment__input(cols="30", rows="10", placeholder="Write a nice comment...")
                 button.comment__add Add Comment
-        div.video__comments
-            ul 
-                each comment in video.comments.reverse()
-                    li#deleteComment.video__comment(data-id=comment.id)
-                        i.fas.fa-comment 
-                        span  #{comment.text}
-                        if String(comment.owner._id) === String(loggedInUser._id)
-                            span.deleteCommentBtn(data-id=comment.id) ❌
+    div.video__comments
+        ul 
+            each comment in video.comments.reverse()
+                li#deleteComment.video__comment(data-id=comment.id)
+                    i.fas.fa-comment 
+                    span  #{comment.text}
+                    if String(comment.owner._id) === String(loggedInUser._id)
+                        span.deleteCommentBtn(data-id=comment.id) ❌
 
 block scripts
     script(src="/static/js/videoPlayer.js")
