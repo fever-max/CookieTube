@@ -10,21 +10,38 @@ const addComment = (text, id) => {
   newComment.dataset.id = id;
   newComment.className = "video__comment";
 
-  const icon = document.createElement("i");
-  icon.className = "fas fa-comment";
+  const avatar = document.createElement("img");
+  avatar.className = "video__comment-avatar";
+  avatar.src = currentUser.avatarUrl;
+  avatar.alt = "commenter's avatar";
 
-  const span = document.createElement("span");
-  span.innerText = ` ${text}`;
+  const commentContent = document.createElement("div");
+  commentContent.className = "video__comment-content";
 
-  const span2 = document.createElement("span");
-  span2.innerText = "❌";
-  span2.style.float = "right";
-  span2.style.alignItems = "center";
+  const commentHeader = document.createElement("div");
+  commentHeader.className = "video__comment-header";
 
-  newComment.appendChild(icon);
-  newComment.appendChild(span);
-  newComment.appendChild(span2);
+  const usernameSpan = document.createElement("span");
+  usernameSpan.className = "video__comment-username";
+  usernameSpan.innerText = currentUser.name;
+
+  const deleteCommentBtn = document.createElement("span");
+  deleteCommentBtn.className = "deleteCommentBtn";
+  deleteCommentBtn.dataset.id = id;
+  deleteCommentBtn.innerText = "❌";
+
+  const commentText = document.createElement("p");
+  commentText.className = "video__comment-text";
+  commentText.innerText = ` ${text}`;
+
+  commentContent.appendChild(commentHeader);
+  commentContent.appendChild(commentText);
+
+  newComment.appendChild(avatarImg);
+  newComment.appendChild(commentContent);
+
   videoComments.prepend(newComment);
+  console.log("댓글이 추가됨");
 };
 
 const handleSubmit = async (event) => {
@@ -73,8 +90,3 @@ document.addEventListener("click", async (event) => {
     window.location.reload();
   }
 });
-
-const avatar = document.createElement("img");
-avatar.className = "video__comment-avatar";
-avatar.src = currentUser.avatarUrl;
-avatar.alt = "commenter's avatar";

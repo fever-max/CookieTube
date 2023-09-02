@@ -137,12 +137,16 @@
 /* 삭제 버튼 */
 .deleteCommentBtn {
   cursor: pointer;
+  font-size: 5px;
 }
 
 /* 댓글 내용 */
 .video__comment-content {
   flex-grow: 1;
-  margin-top: 5px;
   border-radius: 5px;
   padding: 8px;
+}
+
+.video__comment-text {
+  margin-top: 5px;
 }
