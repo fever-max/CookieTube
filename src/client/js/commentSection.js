@@ -42,7 +42,6 @@ const addComment = (text, id) => {
   newComment.appendChild(deleteCommentBtn);
 
   videoComments.prepend(newComment);
-  console.log("댓글이 추가됨");
 };
 
 const handleSubmit = async (event) => {
