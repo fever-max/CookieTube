@@ -42,15 +42,16 @@ block content
                 textarea.comment__input(cols="30", rows="10", placeholder="Write a nice comment...")
                 button.comment__add Add Comment
     div.video__comments
-        each comment in video.comments.reverse()
-            li#deleteComment.video__comment(data-id=comment.id)
-                img.video__comment-avatar(src=comment.owner.avatarUrl, alt="commenter's avatar")
-                div.video__comment-content
-                    div.video__comment-header
-                        span.video__comment-username #{comment.owner.name}
-                        if String(comment.owner._id) === String(loggedInUser._id)
-                            span.deleteCommentBtn(data-id=comment.id) ❌
-                    p.video__comment-text #{comment.text}
+        ul
+            each comment in video.comments.reverse()
+                li#deleteComment.video__comment(data-id=comment.id)
+                    img.video__comment-avatar(src=comment.owner.avatarUrl, alt="commenter's avatar")
+                    div.video__comment-content
+                        div.video__comment-header
+                            span.video__comment-username #{comment.owner.name}
+                            if String(comment.owner._id) === String(loggedInUser._id)
+                                span.deleteCommentBtn(data-id=comment.id) ❌
+                        p.video__comment-text #{comment.text}
 
 block scripts
     script.

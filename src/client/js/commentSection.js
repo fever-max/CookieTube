@@ -37,8 +37,9 @@ const addComment = (text, id) => {
   commentContent.appendChild(commentHeader);
   commentContent.appendChild(commentText);
 
-  newComment.appendChild(avatarImg);
+  newComment.appendChild(avatar);
   newComment.appendChild(commentContent);
+  newComment.appendChild(deleteCommentBtn);
 
   videoComments.prepend(newComment);
   console.log("댓글이 추가됨");
@@ -79,14 +80,13 @@ const handleDelete = async (event) => {
     method: "DELETE",
   });
 
-  if (response.status === 200) {
+  if (response.status === 204) {
     commentElement.remove();
   }
 };
 
 document.addEventListener("click", async (event) => {
-  if (event.target.matches(".video__comment span")) {
+  if (event.target.matches(".deleteCommentBtn")) {
     await handleDelete(event);
-    window.location.reload();
   }
 });
