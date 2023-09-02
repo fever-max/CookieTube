@@ -78,4 +78,3 @@ const avatar = document.createElement("img");
 avatar.className = "video__comment-avatar";
 avatar.src = currentUser.avatarUrl;
 avatar.alt = "commenter's avatar";
-console.log(currentUser.avatarUrl);

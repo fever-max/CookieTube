@@ -109,3 +109,46 @@
   height: 40px;
   border-radius: 50%;
 }
+
+//댓글 스타일
+/* 댓글 컨테이너 */
+.video__comment {
+  display: flex;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+
+/* 댓글 작성자 아바타 이미지 */
+.video__comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+/* 댓글 헤더 */
+.video__comment-header {
+  display: flex;
+  align-items: center;
+}
+
+/* 댓글 작성자 이름 */
+.video__comment-username {
+  font-weight: bold;
+  margin-right: 8px;
+  color: #065fd4;
+}
+
+/* 삭제 버튼 */
+.deleteCommentBtn {
+  color: #f00; /* 삭제 버튼 색상 */
+  cursor: pointer;
+}
+
+/* 댓글 내용 */
+.video__comment-content {
+  flex-grow: 1;
+  background-color: #f5f5f5; /* 댓글 배경색 */
+  border-radius: 5px;
+  padding: 8px;
+}
