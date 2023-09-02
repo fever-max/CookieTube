@@ -33,8 +33,19 @@ body {
 main {
   max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
-  margin-top: 50px;
+  margin: 50px auto;
+  position: relative;
+}
+
+main::before {
+  content: "";
+  display: block;
+  height: 0.5px;
+  background-color: rgba(128, 128, 128, 0.3);
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  right: 0;
 }
 
 @keyframes goAway {
