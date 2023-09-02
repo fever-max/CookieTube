@@ -106,11 +106,11 @@
 }
 
 //댓글 스타일
-/* 댓글 컨테이너 */
 .video__comment {
   display: flex;
   margin-bottom: 16px;
   align-items: flex-start;
+  justify-content: space-between;
 }
 
 /* 댓글 작성자 아바타 이미지 */
@@ -130,13 +130,11 @@
 /* 댓글 작성자 이름 */
 .video__comment-username {
   font-weight: bold;
-  float: left;
   color: #19afdf;
 }
 
 /* 삭제 버튼 */
 .deleteCommentBtn {
-  float: right;
   cursor: pointer;
 }
 
