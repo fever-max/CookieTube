@@ -40,9 +40,11 @@
 }
 
 .loggedInUser__page {
-  margin-top: 20px;
+  display: flex;
+  margin-top: 10px;
   color: gray;
   font-size: 15px;
+  justify-content: flex-end;
 }
 
 //코멘트
@@ -63,29 +65,47 @@
 
 .video__add-comments {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 0 10px;
   margin-top: 20px;
-  textarea {
+  .video__comment-form {
+    display: flex;
+    height: 50px;
     width: 100%;
-    height: 100px;
-    margin-bottom: 10px;
-    resize: vertical;
-    &:focus {
-      outline: none;
-      border-color: cornflowerblue;
-    }
+    margin: 0;
+    padding: 0;
+    justify-content: space-between;
+    max-width: 100%;
   }
-  button {
+  .comment__input {
+    width: 100%;
+    border: none;
+  }
+  .comment__add {
     background-color: #f2f2f2;
     color: gray;
     padding: 10px 10px;
     border: none;
     border-radius: 4px;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
   }
+}
+.comment__add:hover {
+  background-color: #19afdf;
+  color: white;
 }
 
 .deleteCommentBtn {
   align-items: center;
   float: right;
+}
+
+.video__comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }

@@ -45,12 +45,16 @@ block content
         ul 
             each comment in video.comments.reverse()
                 li#deleteComment.video__comment(data-id=comment.id)
-                    i.fas.fa-comment 
-                    span  #{comment.text}
+                    img.video__comment-avatar(src=comment.owner.avatarUrl, alt="commenter's avatar")
+                    div.video__comment-text
+                        span.video__comment-username #{comment.owner.name} 
+                        span.video__comment-content #{comment.text}
                     if String(comment.owner._id) === String(loggedInUser._id)
                         span.deleteCommentBtn(data-id=comment.id) ❌
 
 block scripts
+    script.
+        var currentUser = !{JSON.stringify(loggedInUser)};
     script(src="/static/js/videoPlayer.js")
     if loggedIn
         script(src="/static/js/commentSection.js")
