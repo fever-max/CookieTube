@@ -130,13 +130,12 @@
 /* 댓글 작성자 이름 */
 .video__comment-username {
   font-weight: bold;
-  margin-right: 8px;
+  float: left;
   color: #19afdf;
 }
 
 /* 삭제 버튼 */
 .deleteCommentBtn {
-  color: #f00; /* 삭제 버튼 색상 */
   float: right;
   cursor: pointer;
 }
@@ -144,6 +143,7 @@
 /* 댓글 내용 */
 .video__comment-content {
   flex-grow: 1;
+  margin-top: 5px;
   border-radius: 5px;
   padding: 8px;
 }
