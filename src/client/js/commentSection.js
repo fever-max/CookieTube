@@ -39,6 +39,7 @@ const addComment = (text, id) => {
 
   newComment.appendChild(avatar);
   newComment.appendChild(commentContent);
+  newComment.appendChild(usernameSpan);
   newComment.appendChild(deleteCommentBtn);
 
   videoComments.prepend(newComment);
