@@ -120,13 +120,18 @@ export const deleteVideo = async (req, res) => {
 export const search = async (req, res) => {
   const { keyword } = req.query;
   let videos = [];
+
   if (keyword) {
-    videos = await Video.find({
-      title: {
-        $regex: new RegExp(keyword, "i"),
-      },
-    }).populate("owner");
+    const query = {
+      $or: [
+        { title: { $regex: new RegExp(keyword, "i") } },
+        { hashtags: { $in: [keyword] } },
+      ],
+    };
+
+    videos = await Video.find(query).populate("owner");
   }
+
   return res.render("search", { pageTitle: "Search", videos });
 };
 

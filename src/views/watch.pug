@@ -28,7 +28,11 @@ block content
     div.video__description-hashtags
         small.video__description= video.description
         br 
-        small.video__hashtags= video.hashtags
+        small.video__hashtags
+            - const hashtagsString = (Array.isArray(video.hashtags) ? video.hashtags.join(' ') : video.hashtags) || '';
+            each hashtag in hashtagsString.split(' ')
+                a(href=`/search?keyword=${encodeURIComponent(hashtag)}`)=`#${hashtag}`
+                |&nbsp;
         br
     div.loggedInUser__page
         if String(video.owner._id) === String(loggedInUser._id)
