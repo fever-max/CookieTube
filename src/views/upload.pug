@@ -2,9 +2,11 @@ extends base
 
 block content
     div.upload__container
-        div.upload__video
+
+        //-div.upload__video
             video#preview
             button#actionBtn.social__btn Start Recording
+
         if errorMessage
             span=errorMessage
         form(method="POST", enctype="multipart/form-data")
